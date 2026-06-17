@@ -118,6 +118,30 @@ img{display:block}
 .bcta:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(255,45,61,.46)}
 .bcta svg{width:19px;height:19px;flex:0 0 auto}
 
+/* COLLAB GRID + BRAND LINKS */
+.subh{font-family:var(--disp);font-weight:700;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:24px 4px 13px}
+.collabgrid{display:flex;flex-wrap:wrap;gap:13px}
+.vcol{position:relative;width:150px;aspect-ratio:9/16;border-radius:15px;overflow:hidden;border:1px solid var(--line);background:radial-gradient(125% 80% at 50% 0,rgba(255,45,61,.20),transparent 58%),#15110f;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;cursor:pointer;padding:14px;text-align:center;transition:transform .15s,border-color .15s}
+.vcol:hover{transform:translateY(-3px);border-color:rgba(255,45,61,.5)}
+.vcol:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.vplaybtn{width:48px;height:48px;border-radius:50%;background:linear-gradient(180deg,#ff3340,var(--accent-d));display:grid;place-items:center;box-shadow:0 6px 20px rgba(255,45,61,.42)}
+.vplaybtn svg{width:19px;height:19px;margin-left:2px;fill:#fff}
+.vbrand{font-family:var(--disp);font-weight:700;font-size:.95rem;line-height:1.12;color:var(--txt)}
+.bgrid{display:flex;flex-wrap:wrap;gap:9px}
+.blink{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;background:var(--card);border:1px solid var(--line);font-weight:600;font-size:.85rem;color:var(--txt);transition:transform .15s,background .15s,border-color .15s}
+.blink:hover{transform:translateY(-2px);background:var(--card-h);border-color:rgba(255,45,61,.45)}
+.blink svg{width:16px;height:16px;flex:0 0 auto;color:var(--muted)}
+.blink:hover svg{color:var(--accent)}
+/* IG VIDEO MODAL */
+.igm{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;padding:20px}
+.igm.open{display:flex}
+.igm-bg{position:absolute;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(5px)}
+.igm-box{position:relative;z-index:1;width:min(400px,100%)}
+.igm-x{position:absolute;top:-44px;right:0;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.14);border:1px solid var(--line);color:#fff;font-size:21px;line-height:1;cursor:pointer;display:grid;place-items:center}
+.igm-x:hover{background:rgba(255,255,255,.24)}
+.igm-frame{border-radius:15px;overflow:hidden;background:#000}
+.igm-frame iframe{width:100%;height:min(80vh,700px);border:0;display:block;background:#fff}
+
 /* LINK CARDS */
 .links{display:flex;flex-direction:column;gap:11px}
 .lk{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 15px;min-height:64px;backdrop-filter:blur(8px);transition:transform .15s,background .15s,border-color .15s}
@@ -208,25 +232,61 @@ footer b{color:var(--txt);font-weight:600}
 
     <div class="slabel">Brand Partnerships</div>
     <div class="brandcard">
-      <p class="bpitch">Story-led, highly shareable content built for organic discovery across Instagram Reels &amp; TikTok. I focus on brand integrations that feel native, entertainment first, advertising second, helping brands build awareness, cultural relevance, recall and social buzz.</p>
+      <p class="bpitch">South African short-form video creator partnering with consumer-facing brands across beauty, lifestyle, wellness and retail. My content is story-led and built for organic discovery on Instagram Reels &amp; TikTok, integrations that feel native, entertainment first, advertising second.</p>
       <div class="bstats">
-        <div class="bstat"><span class="bnum">21K</span><span class="blbl">Followers</span></div>
-        <div class="bstat"><span class="bnum">291</span><span class="blbl">Posts</span></div>
+        <div class="bstat"><span class="bnum">21.1K</span><span class="blbl">Followers</span></div>
+        <div class="bstat"><span class="bnum">292</span><span class="blbl">Posts</span></div>
         <div class="bstat"><span class="bnum">2021</span><span class="blbl">Creating since</span></div>
       </div>
-      <div class="bchips">
-        <span class="bchip">FreshStop SA</span>
-        <span class="bchip">ZARBet SA</span>
-        <span class="bchip">Clarins</span>
-        <span class="bchip">BondiBlu</span>
-        <span class="bchip">WhiteGlo</span>
-        <span class="bchip">Taptap Send SA</span>
-        <span class="bchip">Evox Nutrition</span>
-      </div>
-      <a class="bcta" href="https://ig.me/u/theallydamon/cp/BAgHqz67nk/" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1.2" fill="#fff" stroke="none"/></svg>
-        View Full Creator Portfolio
-      </a>
+    </div>
+    <div class="subh">Featured Collabs</div>
+    <div class="collabgrid">
+        <div class="vcol" data-reel="DZXvCb1I2cz" role="button" tabindex="0" aria-label="Play Taptap Send reel">
+          <span class="vplaybtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+          <span class="vbrand">Taptap Send</span>
+        </div>
+        <div class="vcol" data-reel="DYXaZkRIjWf" role="button" tabindex="0" aria-label="Play Taptap Send reel">
+          <span class="vplaybtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+          <span class="vbrand">Taptap Send</span>
+        </div>
+        <div class="vcol" data-reel="DWooqMmCNGo" role="button" tabindex="0" aria-label="Play Taptap Send reel">
+          <span class="vplaybtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+          <span class="vbrand">Taptap Send</span>
+        </div>
+        <div class="vcol" data-reel="DVgrdaVCBGI" role="button" tabindex="0" aria-label="Play Taptap Send reel">
+          <span class="vplaybtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+          <span class="vbrand">Taptap Send</span>
+        </div>
+        <div class="vcol" data-reel="DU58CyRCEQ9" role="button" tabindex="0" aria-label="Play Taptap Send reel">
+          <span class="vplaybtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+          <span class="vbrand">Taptap Send</span>
+        </div>
+        <div class="vcol" data-reel="DWjfbSBCNfF" role="button" tabindex="0" aria-label="Play ZARBet reel">
+          <span class="vplaybtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+          <span class="vbrand">ZARBet</span>
+        </div>
+        <div class="vcol" data-reel="DRUfsQGiP3p" role="button" tabindex="0" aria-label="Play FreshStop reel">
+          <span class="vplaybtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+          <span class="vbrand">FreshStop</span>
+        </div>
+        <div class="vcol" data-reel="DQrkIw9CDV0" role="button" tabindex="0" aria-label="Play FreshStop reel">
+          <span class="vplaybtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+          <span class="vbrand">FreshStop</span>
+        </div>
+        <div class="vcol" data-reel="DOljxE4CNJ2" role="button" tabindex="0" aria-label="Play Clarins reel">
+          <span class="vplaybtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+          <span class="vbrand">Clarins</span>
+        </div>
+    </div>
+    <div class="subh">Brands I’ve Worked With</div>
+    <div class="bgrid">
+        <a class="blink" href="https://www.instagram.com/clarinssouthafrica/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1.2" fill="currentColor" stroke="none"/></svg>Clarins</a>
+        <a class="blink" href="https://www.instagram.com/freshstopsa/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1.2" fill="currentColor" stroke="none"/></svg>FreshStop</a>
+        <a class="blink" href="https://www.instagram.com/taptapsend/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1.2" fill="currentColor" stroke="none"/></svg>Taptap Send</a>
+        <a class="blink" href="https://www.instagram.com/zarbet.co.za/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1.2" fill="currentColor" stroke="none"/></svg>ZARBet</a>
+        <a class="blink" href="https://www.instagram.com/bondiblu_official/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1.2" fill="currentColor" stroke="none"/></svg>BondiBlu</a>
+        <a class="blink" href="https://www.instagram.com/white.glo/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1.2" fill="currentColor" stroke="none"/></svg>WhiteGlo</a>
+        <a class="blink" href="https://www.instagram.com/karousel_collective_jewellery/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1.2" fill="currentColor" stroke="none"/></svg>Karousel Collective</a>
     </div>
 
     <div class="slabel">Music</div>
@@ -309,6 +369,26 @@ document.querySelectorAll('.carousel').forEach(function(c){
   track.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(e){if(moved>8)e.preventDefault();});});
 });
 document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+<div class="igm" id="igm" aria-hidden="true">
+  <div class="igm-bg" data-close></div>
+  <div class="igm-box">
+    <button class="igm-x" data-close aria-label="Close">×</button>
+    <div class="igm-frame"><iframe id="igmFrame" src="" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen scrolling="no"></iframe></div>
+  </div>
+</div>
+<script>
+(function(){
+  var modal=document.getElementById('igm'),frame=document.getElementById('igmFrame');
+  function openR(code){frame.src='https://www.instagram.com/reel/'+code+'/embed/';modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+  function closeR(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');frame.src='';document.body.style.overflow='';}
+  document.querySelectorAll('.vcol').forEach(function(c){
+    c.addEventListener('click',function(){openR(c.getAttribute('data-reel'));});
+    c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openR(c.getAttribute('data-reel'));}});
+  });
+  modal.querySelectorAll('[data-close]').forEach(function(b){b.addEventListener('click',closeR);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeR();});
+})();
 </script>
 </body>
 </html>
