@@ -715,6 +715,17 @@ body.smm-pro {
   /* Services: single column for comfortable reading */
   .smm-services { grid-template-columns: 1fr; }
 
+  /* Creator: the same stats appear in the closing brand CTA, so drop
+     this duplicate set under "A bit of everything" on mobile.
+     The audience-by-platform chart stays. */
+  .cpro-audience .stat-cards { display: none; }
+
+  /* Creator "Follow along": compact list rows (icon · name · count)
+     instead of tall stacked blocks that felt clunky on phones. */
+  .social-grid { grid-template-columns: 1fr; gap: 12px; }
+  .social-card { flex-direction: row; align-items: center; gap: 14px; padding: 16px 18px; }
+  .social-card .sc-count { margin-top: 0; margin-left: auto; text-align: right; font-size: 1.5rem; }
+
   /* Brand partnerships CTA (creator) */
   .cpro-cta { padding: 38px 22px; border-radius: 22px; }
   .cpro-cta h2 { font-size: 1.9rem; }
