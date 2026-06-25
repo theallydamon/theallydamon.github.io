@@ -763,3 +763,47 @@ body.smm-pro {
   .cpro-portrait img { height: 320px; }
   .smm-portrait img  { height: 300px; }
 }
+
+/* ============================================================
+   INTERACTIVE HOVER POLISH (desktop / hover-capable devices)
+   Extends the existing service-card lift to more sections on the
+   creator + SMM pages. Wrapped in @media (hover: hover) so touch
+   screens never trigger a stuck hover state. Layout is unaffected.
+   ============================================================ */
+@media (hover: hover) {
+  /* --- Creator --- */
+  /* audience stat cards */
+  .stat-card { transition: transform .18s ease, border-color .18s ease, box-shadow .2s ease; }
+  .stat-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 14px 32px rgba(0,0,0,.35); }
+
+  /* audience "by platform" chart card */
+  .chart-card { transition: border-color .2s ease, box-shadow .2s ease; }
+  .chart-card:hover { border-color: rgba(225,29,42,.5); box-shadow: 0 14px 34px rgba(0,0,0,.3); }
+
+  /* music feature block */
+  .music-feature { transition: transform .2s ease, border-color .2s ease, box-shadow .25s ease; }
+  .music-feature:hover { transform: translateY(-3px); border-color: rgba(225,29,42,.5); box-shadow: 0 20px 46px rgba(0,0,0,.4); }
+
+  /* --- SMM --- */
+  /* process steps (mirrors the service-card behaviour) */
+  .step { transition: transform .15s ease, border-color .15s ease, box-shadow .2s ease; }
+  .step:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 16px 36px rgba(0,0,0,.38); }
+  .step .num { transition: transform .15s ease, box-shadow .2s ease; }
+  .step:hover .num { transform: scale(1.08); box-shadow: 0 8px 20px rgba(225,29,42,.45); }
+
+  /* results metrics */
+  .smm-metric { transition: transform .15s ease, border-color .15s ease, box-shadow .2s ease; }
+  .smm-metric:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 14px 32px rgba(0,0,0,.35); }
+
+  /* results chart */
+  .smm-chart { transition: border-color .2s ease, box-shadow .2s ease; }
+  .smm-chart:hover { border-color: rgba(225,29,42,.5); box-shadow: 0 16px 36px rgba(0,0,0,.3); }
+
+  /* cinematic band, gentle slow image zoom */
+  .smm-band > img { transition: transform .6s ease; }
+  .smm-band:hover > img { transform: scale(1.045); }
+
+  /* --- Shared: collaboration chips --- */
+  .collab-chip { transition: border-color .15s ease, color .15s ease, background .15s ease; }
+  .collab-chip:hover { border-color: var(--accent); color: var(--text); background: rgba(225,29,42,.08); }
+}
