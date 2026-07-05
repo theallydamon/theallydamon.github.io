@@ -175,7 +175,6 @@
           <div><div class="n">8.6%</div><div class="l">Avg. engagement</div></div>
         </div>
         <div class="cpro-cta-btns">
-          <a class="btn-lg btn-grad" href="mailto:theallydamon@gmail.com?subject=Brand%20partnership%20enquiry">Email for partnerships</a>
           <button type="button" class="btn-lg btn-outline" id="openKitBtn">Download media kit ↓</button>
         </div>
         <div class="cpro-collabs">
@@ -187,13 +186,50 @@
           <span class="collab-chip">BondiBlu</span>
           <span class="collab-chip">Karousel Collective</span>
         </div>
+
+        <div class="cpro-contact" id="brandsContactWrap">
+          <h3>Or send an enquiry directly</h3>
+          <form id="brandsContactForm" novalidate>
+            <!-- Honeypot: hidden from people, bots tend to fill it. If it has a
+                 value we treat the submission as spam and silently ignore it. -->
+            <div class="kit-hp" aria-hidden="true">
+              <label>Company website
+                <input type="text" name="company_website" tabindex="-1" autocomplete="off" />
+              </label>
+            </div>
+            <label class="kit-field">
+              <span>Name <i>*</i></span>
+              <input type="text" name="name" autocomplete="name" required />
+            </label>
+            <label class="kit-field">
+              <span>Brand / Business <i>*</i></span>
+              <input type="text" name="brand" autocomplete="organization" required />
+            </label>
+            <label class="kit-field">
+              <span>Email <i>*</i></span>
+              <input type="email" name="email" autocomplete="email" required />
+            </label>
+            <label class="kit-field">
+              <span>What's the partnership? <em>(optional)</em></span>
+              <textarea name="campaign" rows="3" placeholder="Tell me a bit about the brand and what you have in mind"></textarea>
+            </label>
+            <div class="kit-error" id="brandsContactError" hidden></div>
+            <button type="submit" class="btn-lg btn-grad kit-submit">Send enquiry</button>
+            <p class="kit-fine">I read every message myself. No spam, just used to get back to you.</p>
+          </form>
+        </div>
+        <div class="kit-success" id="brandsContactSuccess" hidden>
+          <div class="kit-check">✓</div>
+          <h3>Message sent</h3>
+          <p class="kit-sub">Thanks, I'll get back to you soon.</p>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="footer">
     <div class="cpro-wrap">
-      <p>© <span id="yr"></span> Ally Damon · <a href="mailto:theallydamon@gmail.com">theallydamon@gmail.com</a> · <a href="SMM.html">Social Media Management →</a></p>
+      <p>© <span id="yr"></span> Ally Damon · <a id="creatorFooterEmail" href="#">contact</a> · <a href="SMM.html">Social Media Management →</a></p>
     </div>
   </footer>
   <!-- MEDIA KIT GATED DOWNLOAD MODAL -->
@@ -246,8 +282,15 @@
     </div>
   </div>
 
+  <script src="forms.js"></script>
   <script>
     document.getElementById('yr').textContent = new Date().getFullYear();
+    revealEmail('creatorFooterEmail', 'theallydamon', 'gmail.com');
+    initContactForm({
+      formId: 'brandsContactForm', errorId: 'brandsContactError',
+      wrapId: 'brandsContactWrap', successId: 'brandsContactSuccess',
+      type: 'partnership_enquiry', brandLabel: 'brand'
+    });
 
     /* ===== Mobile nav (hamburger) ===== */
     (function () {
@@ -267,7 +310,7 @@
     })();
 
     /* ===== Media kit gated download ===== */
-    // The kit lives in Google Drive (theallydamon@gmail.com), shared "Anyone with the link".
+    // The kit lives in Ally's Google Drive, shared "Anyone with the link".
     // To swap the kit later: upload the new file to Drive, keep the same sharing,
     // and replace the id below (the long string after id=) with the new file's id.
     const KIT_FILE = "https://drive.google.com/uc?export=download&id=1Huk36dwGcZk2Uw4aMl2n4DdTUo_kXtr7";

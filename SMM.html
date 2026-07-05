@@ -40,7 +40,7 @@
         <h1>Social that actually grows.</h1>
         <p class="smm-lead">Strategy, content and full management for brands and small businesses that want to show up properly online, run by a creator who does it every day.</p>
         <div class="smm-cta-row">
-          <a class="btn-lg btn-red" href="https://calendar.app.google/Ssgs9eCtszWdB8Ne6" target="_blank" rel="noopener">Book a free discovery call</a>
+          <a class="btn-lg btn-red" href="#contact">Get in touch</a>
           <a class="btn-lg btn-outline2" href="#pricing">See packages</a>
         </div>
       </div>
@@ -240,10 +240,39 @@
         <div class="smm-cta">
           <div class="smm-cta-text">
             <h2>Let's grow your socials.</h2>
-            <p>Tell me about your brand and what you want to grow. Book a free discovery call to get started.</p>
-            <div class="smm-cta-btns">
-              <a class="btn-lg btn-red" href="mailto:theallydamon@gmail.com?subject=Social%20Media%20Management%20Enquiry">Get in touch</a>
-              <a class="btn-lg btn-outline2" href="https://calendar.app.google/Ssgs9eCtszWdB8Ne6" target="_blank" rel="noopener">Schedule video call</a>
+            <p>Tell me about your brand and what you want to grow, and I'll get back to you directly.</p>
+            <form id="smmContactForm" class="contact-inline" novalidate>
+              <!-- Honeypot: hidden from people, bots tend to fill it. If it has a
+                   value we treat the submission as spam and silently ignore it. -->
+              <div class="kit-hp" aria-hidden="true">
+                <label>Company website
+                  <input type="text" name="company_website" tabindex="-1" autocomplete="off" />
+                </label>
+              </div>
+              <label class="kit-field">
+                <span>Name <i>*</i></span>
+                <input type="text" name="name" autocomplete="name" required />
+              </label>
+              <label class="kit-field">
+                <span>Business <i>*</i></span>
+                <input type="text" name="brand" autocomplete="organization" required />
+              </label>
+              <label class="kit-field">
+                <span>Email <i>*</i></span>
+                <input type="email" name="email" autocomplete="email" required />
+              </label>
+              <label class="kit-field">
+                <span>What are you looking for? <em>(optional)</em></span>
+                <textarea name="campaign" rows="3" placeholder="Tell me a bit about your brand and what you need"></textarea>
+              </label>
+              <div class="kit-error" id="smmContactError" hidden></div>
+              <button type="submit" class="btn-lg btn-red kit-submit">Send enquiry</button>
+              <p class="kit-fine">I read every message myself. No spam, just used to get back to you.</p>
+            </form>
+            <div class="kit-success" id="smmContactSuccess" hidden>
+              <div class="kit-check">✓</div>
+              <h3>Message sent</h3>
+              <p class="kit-sub">Thanks, I'll get back to you soon.</p>
             </div>
           </div>
           <img src="assets/smm-hero.jpg" alt="Ally Damon at work" />
@@ -254,11 +283,18 @@
 
   <footer class="footer">
     <div class="wrap">
-      <p>© <span id="yr"></span> Ally Damon SMM · <a href="mailto:theallydamon@gmail.com">theallydamon@gmail.com</a> · <a href="creator.html">← Back to creator page</a></p>
+      <p>© <span id="yr"></span> Ally Damon SMM · <a id="smmFooterEmail" href="#">contact</a> · <a href="creator.html">← Back to creator page</a></p>
     </div>
   </footer>
+  <script src="forms.js"></script>
   <script>
     document.getElementById('yr').textContent = new Date().getFullYear();
+    revealEmail('smmFooterEmail', 'theallydamon', 'gmail.com');
+    initContactForm({
+      formId: 'smmContactForm', errorId: 'smmContactError',
+      wrapId: 'smmContactForm', successId: 'smmContactSuccess',
+      type: 'smm_enquiry', brandLabel: 'business'
+    });
     (function () {
       var toggle = document.querySelector('.nav-toggle');
       var links  = document.getElementById('navLinks');
