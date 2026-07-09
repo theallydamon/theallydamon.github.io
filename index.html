@@ -528,7 +528,16 @@ function computeUrgency(item) {
 function computeContentUrgency(content) {
   const since = daysSince(content.lastPosted);
   const basePct = since === null ? 40 : since * 33;
-  const dueTodayBonus = (content.items || []).filter((i) => i.due && !i.filmed && daysUntil(i.due) <= 0).length * PRIORITY_BASE_PCT.High;
+  /* same escalation as taskFillPercent: a dated idea due today contributes the flat High bonus
+     (25%) same as before, then adds another 25% for every additional day it sits overdue instead
+     of staying flat forever once it slips past today. */
+  const dueTodayBonus = (content.items || []).reduce((sum, i) => {
+    if (!i.due || i.filmed) return sum;
+    const dU = daysUntil(i.due);
+    if (dU > 0) return sum;
+    const overdueDays = dU < 0 ? -dU : 0;
+    return sum + PRIORITY_BASE_PCT.High + overdueDays * PRIORITY_BASE_PCT.High;
+  }, 0);
   const pct = basePct + dueTodayBonus;
   const bucket = pct > 80 ? "Urgent" : pct >= 40 ? "Medium" : "Low";
   const score = Math.round((1 + (Math.min(pct, 100) / 100) * 5) * 10) / 10;
@@ -644,8 +653,17 @@ function urgencyTint(pct) {
    (it's meant to look like "more than a full day"), it just takes a lot more piled up to get there
    now instead of two or three items alone doing it. */
 const PRIORITY_BASE_PCT = { Low: 10, Medium: 15, High: 25 };
+/* once something is actually overdue (not just due today), it keeps escalating: +25 percentage
+   points for every extra day past its due date, stacked on top of the flat priority contribution
+   above. So a High-priority task due today still reads as 25%, same as always, but let it slip to
+   1 day overdue and it jumps to 50%, 2 days overdue is 75%, and so on — neglect keeps compounding
+   rather than sitting flat, which is the whole point of a ring that's allowed to overflow past
+   100%. daysUntilDue comes from computeUrgency (or is pre-set to null for content's _preScored
+   pipeline-only ideas), so this only fires for tasks that actually carry a due date. */
 function taskFillPercent(t) {
-  return PRIORITY_BASE_PCT[t.priority] || PRIORITY_BASE_PCT.Medium;
+  const base = PRIORITY_BASE_PCT[t.priority] || PRIORITY_BASE_PCT.Medium;
+  const overdueDays = t.daysUntilDue != null && t.daysUntilDue < 0 ? -t.daysUntilDue : 0;
+  return base + overdueDays * PRIORITY_BASE_PCT.High;
 }
 function computePillarFillPercent(tasks) {
   return tasks.reduce((s, t) => s + taskFillPercent(t), 0);
