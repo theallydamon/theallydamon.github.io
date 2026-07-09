@@ -417,15 +417,15 @@ const monthName = () => new Date().toLocaleDateString("en-ZA", { month: "long" }
 const isApartmentUnlocked = (ally) => !!ally.apartment.unlockedOverride || ally.unlocks.chains.some((ch) => ch.nodes.some((n) => /move\s*in/i.test(n.label) && n.status === "done"));
 
 /* ---------- pipeline constants ---------- */
-const CONTENT_COLS = ["Ideas", "To Film", "In Edit"];
-const CONTENT_TINT = { Ideas: C.lilac, "To Film": C.amber, "In Edit": C.mint, Posted: FAINT };
+const CONTENT_COLS = ["Ideas", "To Film", "To Edit"];
+const CONTENT_TINT = { Ideas: C.lilac, "To Film": C.amber, "To Edit": C.mint, Posted: FAINT };
 
-/* one-time migration: content items saved under the old Scripted/Filmed/Edited status names get
-   remapped to the current Ideas/To Film/In Edit names, so the label shown on screen always matches
+/* one-time migration: content items saved under the old Scripted/Filmed/Edited/In Edit status names
+   get remapped to the current Ideas/To Film/To Edit names, so the label shown on screen always matches
    the value actually stored (a stale mismatch here caused a real crash before, see Unlocks). Applied
    to both the localStorage load path and the Firestore reconcile path below, since either can hand
    back older data. */
-const CONTENT_STATUS_MIGRATE = { Scripted: "Ideas", Filmed: "To Film", Edited: "In Edit" };
+const CONTENT_STATUS_MIGRATE = { Scripted: "Ideas", Filmed: "To Film", Edited: "To Edit", "In Edit": "To Edit" };
 function migrateAlly(a) {
   if (!a) return a;
   let out = a;
@@ -516,7 +516,7 @@ function computeUrgency(item) {
 /* content's ring has two stacked weightings, not just one. The base signal is still the whole
    pillar's days-since-last-post, full stop — 1 day since post = 33% full, 3 days = 100%, and it
    keeps climbing past that into an overflow/critical state if you let it run, exactly as before.
-   It still does not care what's sitting in the pipeline (Ideas/To Film/In Edit are for your own
+   It still does not care what's sitting in the pipeline (Ideas/To Film/To Edit are for your own
    tracking only). On top of that base, though, any individual idea that's due today or overdue
    adds the same "High priority" weighting (PRIORITY_BASE_PCT.High, 20%) used everywhere else in
    the app, once per dated idea — this is additive (summed), not the max()-picks-one-signal rule
@@ -1304,7 +1304,7 @@ function AllyCRM() {
 function contentHealth(content) {
   const since = daysSince(content.lastPosted);
   const counts = Object.fromEntries(CONTENT_COLS.map((c) => [c, content.items.filter((i) => i.status === c).length]));
-  const ready = counts["In Edit"];
+  const ready = counts["To Edit"];
   let tint = C.mint, msg = "On track. Keep the machine fed.";
   if (since === null) { tint = C.sky; msg = "Log when you last posted to start the runway clock."; }
   else if (since >= content.cadence && ready === 0) { tint = C.rose; msg = "Post overdue and nothing edited. Film or edit today."; }
@@ -1464,13 +1464,13 @@ function ContentPillarCard({ content, go, rank, pct }) {
   const since = daysSince(content.lastPosted);
   const tint = urgencyTint(pct);
   const critical = pct > 100;
-  const pipelineCols = ["In Edit", "To Film", "Ideas"];
+  const pipelineCols = ["To Edit", "To Film", "Ideas"];
   const counts = Object.fromEntries(pipelineCols.map((c) => [c, content.items.filter((i) => i.status === c).length]));
   /* two separate deadline feeds so filming deadlines and editing deadlines stay visually apart —
      title pulls through by title only (never the script/desc box), same rule every other pillar
      follows. The ring above stays purely days-since-post driven regardless of what's in either list. */
   const toFilmDated = content.items.filter((i) => i.status === "To Film" && i.due && !i.filmed).sort((a, b) => daysUntil(a.due) - daysUntil(b.due)).slice(0, 3);
-  const toEditDated = content.items.filter((i) => i.status === "In Edit" && i.due).sort((a, b) => daysUntil(a.due) - daysUntil(b.due)).slice(0, 3);
+  const toEditDated = content.items.filter((i) => i.status === "To Edit" && i.due).sort((a, b) => daysUntil(a.due) - daysUntil(b.due)).slice(0, 3);
   return (
     <div onClick={() => go("content")} className="rounded-2xl p-5" style={{ ...card, borderRadius: 18, borderLeft: `4px solid ${mod.accent}`, cursor: "pointer" }}>
       <div className="flex items-center justify-between mb-3">
@@ -1970,7 +1970,7 @@ function ContentModule({ data, setData, q }) {
                     </div>
                     <div className="flex items-center gap-1 mt-1.5"><span className="ml-auto flex gap-1">
                       {col !== "Idea" && <button onClick={() => move(i.id, -1)} style={{ ...iconBtn, padding: 2 }} aria-label="Back">←</button>}
-                      {col === "In Edit"
+                      {col === "To Edit"
                         ? <button onClick={() => markPosted(i.id)} className="rounded-full px-2.5 py-0.5" style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.03em", cursor: "pointer", fontFamily: "inherit", background: `${C.mint}22`, border: `1px solid ${C.mint}55`, color: C.mint }}>POSTED</button>
                         : <button onClick={() => move(i.id, 1)} style={{ ...iconBtn, padding: 2, color: C.mint }} aria-label="Forward">→</button>}
                       <button onClick={() => remove(i.id)} style={{ ...iconBtn, padding: 2 }} aria-label="Delete"><X size={11} /></button>
@@ -2321,7 +2321,10 @@ function LifeAdminModule({ data, setData, q }) {
                 {colItems.map((t) => (
                   <div key={t.id} data-nav-id={t.id} className="rounded-xl p-3" style={{ ...card, borderRadius: 12, borderLeft: `2px solid ${C.rose}` }}>
                     <div style={{ fontSize: 13.5, textDecoration: col === "Done" ? "line-through" : "none", opacity: col === "Done" ? 0.55 : 1 }}><InlineEdit value={t.title} onChange={(v) => update(t.id, { title: v })} /></div>
-                    <div style={{ fontSize: 11.5, color: MUT, marginTop: 2 }}><InlineEdit value={t.description || ""} onChange={(v) => update(t.id, { description: v })} placeholder="Add a description…" /></div>
+                    {/* AutoTextarea instead of InlineEdit here specifically — same auto-grow-on-paste
+                        behavior as the content tab's script box, so a long pasted description isn't
+                        squashed into a single-line input like the title above it. */}
+                    <div style={{ marginTop: 4 }}><AutoTextarea value={t.description || ""} onChange={(v) => update(t.id, { description: v })} placeholder="Add a description…" /></div>
                     <div className="flex items-center gap-2 mt-2 flex-wrap" style={{ fontSize: 11, color: MUT }}>
                       <span className="ml-auto flex gap-1">
                         {col !== "To do" && <button onClick={() => back(t.id)} style={iconBtn} aria-label="Back">←</button>}
