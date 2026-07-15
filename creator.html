@@ -136,11 +136,9 @@
 </div>
 
 <div class="feature-grid">
-<!-- Jesse Clegg (hero feature) -->
 <a class="feature-card feature-hero reveal" href="https://www.youtube.com/results?search_query=ALLY+DAMON+JESSE+CLEGG" target="_blank" rel="noopener" aria-label="Watch my music videos with Jesse Clegg">
 <div class="fc-media">
-<img class="fc-thumb" src="https://img.youtube.com/vi/vQOJ7Thr9Es/hqdefault.jpg" alt="Music videos with Jesse Clegg" loading="lazy" />
-<video class="fc-preview" muted loop playsinline preload="none" poster="https://img.youtube.com/vi/vQOJ7Thr9Es/hqdefault.jpg"></video>
+<img class="fc-thumb" src="https://img.youtube.com/vi/ZsxAMSn1xSo/hqdefault.jpg" alt="Music videos with Jesse Clegg" loading="lazy" />
 <span class="fc-play" aria-hidden="true">
 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
 </span>
@@ -152,11 +150,9 @@
 </div>
 </a>
 
-<!-- Acting feature 1 -->
 <a class="feature-card reveal" href="https://youtu.be/TO4mF3puPl4" target="_blank" rel="noopener" aria-label="Watch: Itchy Negotiation Scene – Just Now Jeffrey">
 <div class="fc-media">
 <img class="fc-thumb" src="https://img.youtube.com/vi/TO4mF3puPl4/hqdefault.jpg" alt="Just Now Jeffrey feature" loading="lazy" />
-<video class="fc-preview" muted loop playsinline preload="none" poster="https://img.youtube.com/vi/TO4mF3puPl4/hqdefault.jpg"></video>
 <span class="fc-play" aria-hidden="true">
 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
 </span>
@@ -168,11 +164,9 @@
 </div>
 </a>
 
-<!-- Acting feature 2 -->
 <a class="feature-card reveal" href="https://youtu.be/Gprzl1GHEis" target="_blank" rel="noopener" aria-label="Watch: Police Search Scene – Murder On The Inca Trail">
 <div class="fc-media">
 <img class="fc-thumb" src="https://img.youtube.com/vi/Gprzl1GHEis/hqdefault.jpg" alt="Murder On The Inca Trail feature" loading="lazy" />
-<video class="fc-preview" muted loop playsinline preload="none" poster="https://img.youtube.com/vi/Gprzl1GHEis/hqdefault.jpg"></video>
 <span class="fc-play" aria-hidden="true">
 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
 </span>
@@ -256,8 +250,6 @@
 <div class="cpro-contact" id="brandsContactWrap">
 <h3>Or send an enquiry directly</h3>
 <form id="brandsContactForm" novalidate>
-<!-- Honeypot: hidden from people, bots tend to fill it. If it has a
-value we treat the submission as spam and silently ignore it. -->
 <div class="kit-hp" aria-hidden="true">
 <label>Company website
 <input type="text" name="company_website" tabindex="-1" autocomplete="off" />
@@ -308,8 +300,6 @@ value we treat the submission as spam and silently ignore it. -->
 <p class="kit-sub">Tell me a little about you and the kit will download straight away.</p>
 
 <form id="kitForm" novalidate>
-<!-- Honeypot: hidden from people, bots tend to fill it. If it has a
-value we treat the submission as spam and silently ignore it. -->
 <div class="kit-hp" aria-hidden="true">
 <label>Company website
 <input type="text" name="company_website" tabindex="-1" autocomplete="off" />
@@ -378,9 +368,6 @@ toggle.setAttribute('aria-expanded', 'false');
 (function () {
 var cards = document.querySelectorAll('.feature-card.reveal');
 if (!cards.length) return;
-
-// Scroll reveal: cards fade + rise into view, and get a one-time
-// "look at me, I'm clickable" pulse the first time they appear.
 if ('IntersectionObserver' in window) {
 var io = new IntersectionObserver(function (entries) {
 entries.forEach(function (entry) {
@@ -389,14 +376,11 @@ entry.target.classList.add('in-view');
 io.unobserve(entry.target);
 }
 });
-}, { threshold: 0.25 });
+}, { threshold: 0.2 });
 cards.forEach(function (c) { io.observe(c); });
 } else {
 cards.forEach(function (c) { c.classList.add('in-view'); });
 }
-
-// Hover / focus preview: gently zoom the thumbnail and pulse the
-// play button so it's obvious the card opens a video.
 cards.forEach(function (c) {
 c.addEventListener('mouseenter', function () { c.classList.add('previewing'); });
 c.addEventListener('mouseleave', function () { c.classList.remove('previewing'); });
@@ -406,12 +390,7 @@ c.addEventListener('blur', function () { c.classList.remove('previewing'); });
 })();
 
 /* ===== Media kit gated download ===== */
-// The kit lives in Ally's Google Drive, shared "Anyone with the link".
-// To swap the kit later: upload the new file to Drive, keep the same sharing,
-// and replace the id below (the long string after id=) with the new file's id.
 const KIT_FILE = "https://drive.google.com/uc?export=download&id=1Huk36dwGcZk2Uw4aMl2n4DdTUo_kXtr7";
-// Capture endpoint: paste your Google Apps Script Web App URL between the quotes.
-// The download works regardless; leads are only logged once this is set.
 const KIT_ENDPOINT = "https://script.google.com/macros/s/AKfycbyHK0iLFi-CPVd0xA6vY0Kz7T_hVb4gDAhZ3D92K_8kSHAp43xIKTbl6aYPEuUZ6bAJ/exec";
 
 (function () {
@@ -430,8 +409,6 @@ function close() { overlay.classList.remove('show'); overlay.setAttribute('aria-
 function reset() { form.reset(); formWrap.hidden=false; success.hidden=true; errorBox.hidden=true; submitBtn.disabled=false; submitBtn.textContent='Download the kit'; }
 
 function triggerDownload() {
-// Drive serves the file with its own name; no download attribute needed
-// (it's ignored cross-origin anyway). The export=download link forces the save.
 const a = document.createElement('a');
 a.href = KIT_FILE;
 a.rel = 'noopener';
@@ -449,12 +426,7 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.
 form.addEventListener('submit', (e) => {
 e.preventDefault();
 errorBox.hidden = true;
-
-// Honeypot: if the hidden field is filled, it's a bot. Silently stop.
-if (form.company_website && form.company_website.value.trim() !== '') {
-return;
-}
-
+if (form.company_website && form.company_website.value.trim() !== '') { return; }
 const data = {
 name: form.name.value.trim(),
 brand: form.brand.value.trim(),
@@ -462,7 +434,6 @@ email: form.email.value.trim(),
 campaign: form.campaign.value.trim(),
 company_website: form.company_website ? form.company_website.value.trim() : ''
 };
-
 if (!data.name || !data.brand || !data.email) {
 errorBox.textContent = 'Please fill in your name, brand and email.';
 errorBox.hidden = false; return;
@@ -471,17 +442,14 @@ if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
 errorBox.textContent = 'That email doesn\u2019t look right — please check it.';
 errorBox.hidden = false; return;
 }
-
-// Capture the lead (fire-and-forget; never blocks the download).
 if (KIT_ENDPOINT.indexOf('PASTE_YOUR') !== 0) {
 fetch(KIT_ENDPOINT, {
 method: 'POST',
 mode: 'no-cors',
 headers: { 'Content-Type': 'text/plain;charset=utf-8' },
 body: JSON.stringify(data)
-}).catch(function () { /* ignore: download still proceeds */ });
+}).catch(function () { });
 }
-
 triggerDownload();
 formWrap.hidden = true;
 success.hidden = false;
