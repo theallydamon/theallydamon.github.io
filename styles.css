@@ -812,3 +812,185 @@ body.smm-pro {
   .collab-chip { transition: border-color .15s ease, color .15s ease, background .15s ease; }
   .collab-chip:hover { border-color: var(--accent); color: var(--text); background: rgba(225,29,42,.08); }
 }
+
+
+/* =====================================================
+   FEATURES SECTION — video feature cards + scroll reveal
+   Added for the "Featured in" section on creator.html
+   ===================================================== */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.feature-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--text);
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+  will-change: transform;
+}
+.feature-card:hover,
+.feature-card.previewing {
+  transform: translateY(-6px);
+  border-color: var(--accent);
+  box-shadow: 0 18px 50px rgba(225,29,42,.20);
+}
+
+.feature-card.feature-hero {
+  grid-column: 1 / -1;
+}
+
+.fc-media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #000;
+}
+.feature-hero .fc-media { aspect-ratio: 21 / 9; }
+
+.fc-thumb,
+.fc-preview {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.fc-thumb {
+  transition: transform .6s cubic-bezier(.22,1,.36,1), filter .3s ease;
+  filter: saturate(1) brightness(.92);
+}
+.fc-preview { opacity: 0; }
+.feature-card:hover .fc-thumb,
+.feature-card.previewing .fc-thumb {
+  transform: scale(1.06);
+  filter: saturate(1.1) brightness(1);
+}
+
+.fc-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,.05) 0%, rgba(0,0,0,.55) 100%);
+  pointer-events: none;
+}
+
+.fc-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: rgba(225,29,42,.92);
+  box-shadow: 0 8px 30px rgba(225,29,42,.5);
+  z-index: 2;
+  transition: transform .25s ease, background .25s ease;
+}
+.fc-play svg { width: 28px; height: 28px; margin-left: 3px; }
+.feature-card:hover .fc-play,
+.feature-card.previewing .fc-play {
+  transform: translate(-50%, -50%) scale(1.12);
+  background: var(--accent-2);
+}
+
+.fc-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(0,0,0,.55);
+  border: 1px solid rgba(255,255,255,.18);
+  padding: 5px 10px;
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+}
+
+.fc-body { padding: 18px 20px 20px; }
+.fc-title {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  margin-bottom: 4px;
+}
+.feature-hero .fc-title { font-size: 1.4rem; }
+.fc-sub { color: var(--muted); font-size: .95rem; }
+.fc-arrow {
+  display: inline-block;
+  color: var(--accent-2);
+  transition: transform .25s ease;
+}
+.feature-card:hover .fc-arrow,
+.feature-card.previewing .fc-arrow { transform: translate(3px,-3px); }
+
+.feature-card.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .6s ease, transform .6s cubic-bezier(.22,1,.36,1);
+}
+.feature-card.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+.feature-card.reveal:nth-child(2) { transition-delay: .08s; }
+.feature-card.reveal:nth-child(3) { transition-delay: .16s; }
+
+@keyframes fcAttention {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(225,29,42,0); }
+  40%      { box-shadow: 0 0 0 6px rgba(225,29,42,.18); }
+}
+.feature-card.feature-hero.in-view { animation: fcAttention 1.6s ease .3s 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .feature-card.reveal { opacity: 1; transform: none; transition: none; }
+  .feature-card.feature-hero.in-view { animation: none; }
+  .fc-thumb, .fc-play, .fc-arrow { transition: none; }
+}
+
+/* =====================================================
+   "For brand work:" section divider
+   ===================================================== */
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 64px 0 8px;
+}
+.section-divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+}
+.section-divider-label {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: .8rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .feature-grid { grid-template-columns: 1fr; }
+  .feature-hero .fc-media { aspect-ratio: 16 / 9; }
+  .section-divider { margin: 48px 0 4px; }
+}
