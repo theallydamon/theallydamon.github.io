@@ -278,17 +278,14 @@
         </div>
       </div>
     </section>
-  </main>
-
-  <footer class="footer">
+<footer class="footer">
     <div class="wrap">
-      <p>© <span id="yr"></span> Ally Damon SMM · <a id="smmFooterEmail" href="#">contact</a> · <a href="creator.html">← Back to creator page</a></p>
+      <p>© <span id="yr"></span> Ally Damon SMM · <a href="#contact">contact</a> · <a href="creator.html">← Back to creator page</a></p>
     </div>
   </footer>
   <script src="forms.js"></script>
   <script>
     document.getElementById('yr').textContent = new Date().getFullYear();
-    revealEmail('smmFooterEmail', 'theallydamon', 'gmail.com');
     initContactForm({
       formId: 'smmContactForm', errorId: 'smmContactError',
       wrapId: 'smmContactForm', successId: 'smmContactSuccess',
