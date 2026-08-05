@@ -425,6 +425,9 @@ body.creator-pro {
   background: linear-gradient(120deg, rgba(225,29,42,0.14), rgba(120,10,16,0.16));
   border: 1px solid var(--border); border-radius: 26px; padding: 34px;
 }
+.music-release-list { display: grid; gap: 24px; }
+.music-pro .music-hero { padding-bottom: 48px; }
+.music-pro .music-portrait img { object-position: center; }
 .music-feature .cover { width: 100%; border-radius: 18px; box-shadow: 0 24px 60px rgba(0,0,0,0.55); display: block; }
 .music-feature .eyebrow { color: var(--accent); }
 .music-feature h3 { font-family: "Space Grotesk", Inter, sans-serif; font-size: 2.6rem; font-weight: 700; letter-spacing: -0.02em; margin: 6px 0 4px; }

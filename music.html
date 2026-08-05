@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ally Damon, Music</title>
+<meta name="description" content="Listen to Ally Damon's latest music releases." />
+<meta property="og:title" content="Ally Damon, Music" />
+<meta property="og:description" content="Listen to Ally Damon's latest music releases." />
+<meta property="og:type" content="website" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css?v=4" />
+</head>
+<body class="creator-pro music-pro">
+<nav class="nav">
+<div class="wrap">
+<span class="brand">Ally Damon <span style="color:var(--accent)">Music</span></span>
+<button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
+<div class="links" id="navLinks">
+<a href="#releases">Releases</a>
+<a class="nav-pill" href="index.html">Home</a>
+</div>
+</div>
+</nav>
+<header class="cpro-hero music-hero">
+<div class="cpro-wrap cpro-hero-inner">
+<div class="cpro-hero-text">
+<span class="cpro-eyebrow">Ally Damon, Music</span>
+<h1>Listen in.</h1>
+<p class="cpro-lead">The latest releases, ready to stream on your platform of choice.</p>
+<div class="cpro-cta-row"><a class="btn-lg btn-grad" href="#releases">Latest release</a></div>
+</div>
+<div class="cpro-portrait music-portrait"><img src="assets/better-on-your-own.jpg" alt="Better On Your Own single cover" /></div>
+</div>
+</header>
+<main class="cpro-wrap">
+<section class="cpro-section" id="releases">
+<div class="cpro-head">
+<div class="cpro-kicker">Releases</div>
+<h2>Out now</h2>
+<p>Find each release on the streaming service you use.</p>
+</div>
+<div class="music-release-list">
+<article class="music-feature">
+<img class="cover" src="assets/better-on-your-own.jpg" alt="Better On Your Own single cover" />
+<div class="music-info">
+<div class="eyebrow">Latest Release</div>
+<h3>Better On Your Own</h3>
+<p class="sub">Out now, stream it on your platform of choice.</p>
+<div class="pills">
+<a class="pill brand-spotify" href="https://music.youtube.com/watch?v=Zv-XQuJZQDU&amp;si=nIGFZ5r0BKnUooRZ" target="_blank" rel="noopener">Spotify</a>
+<a class="pill brand-apple" href="https://music.apple.com/us/song/better-on-your-own/6798075298" target="_blank" rel="noopener">Apple Music</a>
+<a class="pill brand-yt" href="https://music.youtube.com/watch?v=Zv-XQuJZQDU&amp;si=nIGFZ5r0BKnUooRZ" target="_blank" rel="noopener">YouTube Music</a>
+<a class="pill brand-deezer" href="https://link.deezer.com/s/341Xj4hjw32H68wPsOguk" target="_blank" rel="noopener">Deezer</a>
+</div>
+</div>
+</article>
+<article class="music-feature">
+<img class="cover" src="assets/song-cover.jpg" alt="In the Cold single cover" />
+<div class="music-info">
+<div class="eyebrow">Single</div>
+<h3>In the Cold</h3>
+<p class="sub">Out now, stream it on your platform of choice.</p>
+<div class="pills">
+<a class="pill brand-spotify" href="https://open.spotify.com/album/6DT9CDrT38gmLGolGcbarC" target="_blank" rel="noopener">Spotify</a>
+<a class="pill brand-apple" href="https://music.apple.com/za/album/in-the-cold-single/1884320792" target="_blank" rel="noopener">Apple Music</a>
+<a class="pill brand-yt" href="https://music.youtube.com/watch?v=m2lHkrizxuM" target="_blank" rel="noopener">YouTube Music</a>
+<a class="pill brand-deezer" href="https://www.deezer.com/album/937471061" target="_blank" rel="noopener">Deezer</a>
+<a class="pill brand-iheart" href="https://www.iheart.com/artist/id-49983543/albums/id-386353900" target="_blank" rel="noopener">iHeartRadio</a>
+</div>
+</div>
+</article>
+</div>
+</section>
+</main>
+<footer class="footer"><div class="cpro-wrap"><p>© <span id="yr"></span> Ally Damon, <a href="index.html">home</a></p></div></footer>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();document.querySelector('.nav-toggle').addEventListener('click',function(){var n=document.getElementById('navLinks');var open=n.classList.toggle('open');this.setAttribute('aria-expanded',open);});</script>
+</body>
+</html>
